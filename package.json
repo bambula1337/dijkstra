@@ -1,0 +1,24 @@
+{
+  "name": "adms_dijkstra",
+  "version": "1.0.0",
+  "description": "This is an implementation of Dijkstra algorithm using Typescript",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": ["lib/**/*"],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare" : "npm run build",
+    "prepublishOnly" : "npm test && npm run lint"
+  },
+  "author": "Oleg Golevitch",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^5.1.6"
+  }
+}
