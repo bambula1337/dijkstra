@@ -29,10 +29,10 @@ export function dijkstra (_graph: TGraph, _onlyFinalCost = false): TCosts | numb
   let node = getLowestCostNode();
   while (node) {
     const cost = costs[node];
-    let children = _graph[node];
+    const children = _graph[node];
 
     Object.entries(children).forEach(([_childNode, _childCost]) => {
-      let newCost = cost + _childCost;
+      const newCost = cost + _childCost;
       if (!costs[_childNode] || costs[_childNode] > newCost) {
         costs[_childNode] = newCost;
         parents[_childNode] = node;
