@@ -1,6 +1,6 @@
 {
   "name": "adms_dijkstra",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This is an implementation of Dijkstra algorithm using Typescript",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
