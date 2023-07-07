@@ -55,7 +55,7 @@ export function dijkstra (_graph: TGraph, _onlyFinalCost = false): TCosts | numb
   }
 
   if(_onlyFinalCost){
-    return _graph['finish']
+    return _graph.finish
   } else {
     return costs
   }
