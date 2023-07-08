@@ -2,7 +2,7 @@ type TGraph = Record<string, Record<string, number>> & { start: Record<string, n
   finish: Record<string, number>;
 };
 type TCosts = Record<string, number>;
-type TParents = Record<string, null | string>;
+type TParents = Record<string, null | string> & {finish: null | string};
 type TProceed = Record<string, boolean>;
 
 /**
@@ -16,8 +16,9 @@ type TProceed = Record<string, boolean>;
  *   finish: {},
  * }"
  * @param _onlyFinalCost Default is false, specify true if you want to just get the number of cost to the "finish". Will return Infinity if there is no way to the "finish"
+ * @returns returns an object which contains costs, and the most efficient path to "finish". If there is no path to finish returns null instead, and the cost is infinity. If second parameter is true returns only cost for "finish".
  */
-export function dijkstra(_graph: TGraph, _onlyFinalCost = false): TCosts | number {
+export function dijkstra(_graph: TGraph, _onlyFinalCost = false) {
   const costs: TCosts = { ..._graph.start, finish: Infinity };
   const parents: TParents = { finish: null };
   Object.keys(_graph.start).forEach((_key) => {
@@ -53,9 +54,26 @@ export function dijkstra(_graph: TGraph, _onlyFinalCost = false): TCosts | numbe
     }, null);
   }
 
+  let path: string | null = null
+  if(parents.finish){
+    let result = 'finish'
+    let localParent: string | null = parents.finish
+    while(localParent){
+      result = `${localParent} -> ${result}`
+      localParent = parents[localParent]
+    }
+    path = result
+  }
+
   if (_onlyFinalCost) {
-    return costs.finish;
+    return {
+      path,
+      costs: costs.finish
+    };
   } else {
-    return costs;
+    return {
+      path,
+      costs,
+    };
   }
 }
